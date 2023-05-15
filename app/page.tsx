@@ -30,6 +30,7 @@ export default function Home() {
 
   return (
     <div className="bg-white mx-auto grid grid-cols-12 gap-4 p-1">
+
       <div className="col-span-12 rounded-lg bg-white p-32 sm:col-span-8">
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">Fruits</h2>
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -47,17 +48,18 @@ export default function Home() {
                     {x.name}
                   </h3>
                 </div>
-                <div className="flex items-center">
+                <p className="text-sm font-medium text-gray-900">${x.price}</p>
+              </div>
+                <div>
                   <button onClick={() => handleAddToCart({ id: x.id, name: x.name, price: x.price })} className="bg-gray-800 text-white px-4 py-2 rounded-md">
                     Add to Cart
                   </button>
                 </div>
-                <p className="text-sm font-medium text-gray-900">${x.price}</p>
-              </div>
             </div>
           ))}
         </div>
       </div>
+
       <div className="col-span-12 rounded-lg border border-gray-400 bg-gray-200 p-16 sm:col-span-4">
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">Cart</h2>
         <div className="mt-6">
@@ -65,7 +67,11 @@ export default function Home() {
             <li className='text-black'>{item.name} x {item.quantity} = ${(item.quantity * item.price).toFixed(2)}</li>
           ))}
         </div>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+          Checkout
+        </button>
       </div>
+
     </div>
 
   )

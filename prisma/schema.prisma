@@ -12,6 +12,7 @@ model fruit {
   name      String  @db.VarChar(200)
   price     Decimal @db.Decimal(10, 2)
   image_url String? @db.VarChar(255)
+  stock     Int     @default(0)
 }
 
 model purchase {
