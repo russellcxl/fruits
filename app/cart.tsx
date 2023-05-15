@@ -1,15 +1,5 @@
 import React from 'react';
-
-export type CartItem = {
-    id: number,
-    name: string,
-    price: number,
-    quantity: number,
-}
-
-type CartProps = {
-    items: CartItem[],
-}
+import { CartProps } from './types';
 
 export function Cart(props:CartProps) {
     return (
@@ -20,7 +10,7 @@ export function Cart(props:CartProps) {
                     <li className='text-black'>{item.name} x {item.quantity} = ${(item.quantity * item.price).toFixed(2)}</li>
                 ))}
             </div>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" onClick={() => props.handleCheckout()}>
                 Checkout
             </button>
         </div>

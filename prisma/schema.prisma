@@ -17,9 +17,7 @@ model fruit {
 
 model purchase {
   id                    Int      @id @default(autoincrement())
-  customer_name         String   @db.VarChar(255)
-  customer_phone_number String   @db.VarChar(20)
-  purchase_date         DateTime @db.Date
+  purchase_date         DateTime @db.Timestamp
   purchase_value        Decimal  @db.Decimal(10, 2)
   purchased_items       Json
 }
