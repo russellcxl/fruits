@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from 'react';
-import { Cart } from './cart';
-import { Products } from './products';
-import { CartItem, Product, PurchasedItem } from './types';
+import { Cart } from './components/cart';
+import { Products } from './components/products';
+import { CartItem, Product, PurchasedItem } from './components/types';
 import { log } from 'console';
 
 export default function Home() {
