@@ -1,7 +1,7 @@
 import { prisma } from "../../prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
-type dataProps = {
+type purchase = {
     customer_name: string,
     customer_phone_number: string,
     purchase_date: Date,
@@ -12,7 +12,7 @@ type dataProps = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
         // TODO: add validation for req.body
-        const data: dataProps = JSON.parse(req.body)
+        const data:purchase = JSON.parse(req.body)
         if (req.method === 'POST') {
             const purchase = await prisma.purchase.create({
                 data
