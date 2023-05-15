@@ -1,10 +1,11 @@
 "use client"
 
 import { useEffect, useState } from 'react';
+import { Cart, CartItem } from './cart';
 
 export default function Home() {
   const [data, setData] = useState<{ id: number, name: string, price: number, image_url: string }[]>([]);
-  const [cart, setCart] = useState<{ id: number, name: string, price: number, quantity: number }[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   useEffect(() => {
     const fetchResponse = async () => {
@@ -50,26 +51,18 @@ export default function Home() {
                 </div>
                 <p className="text-sm font-medium text-gray-900">${x.price}</p>
               </div>
-                <div>
-                  <button onClick={() => handleAddToCart({ id: x.id, name: x.name, price: x.price })} className="bg-gray-800 text-white px-4 py-2 rounded-md">
-                    Add to Cart
-                  </button>
-                </div>
+              <div>
+                <button onClick={() => handleAddToCart({ id: x.id, name: x.name, price: x.price })} className="bg-gray-800 text-white px-4 py-2 rounded-md">
+                  Add to Cart
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       <div className="col-span-12 rounded-lg border border-gray-400 bg-gray-200 p-16 sm:col-span-4">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900">Cart</h2>
-        <div className="mt-6">
-          {cart.map((item) => (
-            <li className='text-black'>{item.name} x {item.quantity} = ${(item.quantity * item.price).toFixed(2)}</li>
-          ))}
-        </div>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-          Checkout
-        </button>
+        <Cart items={cart} />
       </div>
 
     </div>
