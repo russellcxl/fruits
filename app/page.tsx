@@ -85,8 +85,7 @@ export default function Home() {
 
 	return (
 		<div className="bg-white mx-auto grid grid-cols-12 gap-4 p-1">
-
-			<div className="col-span-12 rounded-lg bg-white p-32 sm:col-span-8">
+			<div className="col-span-12 rounded-lg bg-white p-16 sm:col-span-8">
 				<Products
 					products={products}
 					handleAddToCart={handleAddToCart} />
