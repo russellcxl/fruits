@@ -20,6 +20,17 @@ export default function Home() {
 
 	const handleAddToCart = (fruit: Product) => {
 
+		// reduce stock value for product
+		for (let i = 0; i < products.length; i++) {
+			const p = products[i]
+			if (fruit.id === p.id) {
+				if (p.stock === 0) { return }
+				p.stock--
+				break
+			}
+		}
+		setProducts(products)
+
 		// add items to cart panel
 		const existingCartItem = cart.find(item => item.id === fruit.id)
 		if (existingCartItem) {
@@ -28,14 +39,6 @@ export default function Home() {
 			setCart(prevCart => [...prevCart, { id: fruit.id, name: fruit.name, price: fruit.price, quantity: 1 }])
 		}
 
-		// reduce stock value for product
-		for (let i = 0; i < products.length; i++) {
-			const p = products[i]
-			if (fruit.id === p.id) {
-				p.stock--
-			}			
-		}
-		setProducts(products)
 	}
 
 	const handleRemoveFromCart = (fruitId: number) => {
@@ -49,7 +52,7 @@ export default function Home() {
 			}).reduce((a, b) => {
 				return a + b
 			}, 0)
-			const purchasedItems:PurchasedItem[] = cart.map((item) => {
+			const purchasedItems: PurchasedItem[] = cart.map((item) => {
 				return {
 					id: item.id,
 					name: item.name,
@@ -81,8 +84,8 @@ export default function Home() {
 					handleAddToCart={handleAddToCart} />
 			</div>
 			<div className="col-span-12 rounded-lg border border-gray-400 bg-gray-200 p-16 sm:col-span-4">
-				<Cart 
-					items={cart} 
+				<Cart
+					items={cart}
 					handleCheckout={handleCheckout} />
 			</div>
 
