@@ -23,7 +23,12 @@ export function Products(props: ProductsProps) {
 							<p className="text-sm font-medium text-gray-900">${x.price}</p>
 						</div>
 						<div>
-							<button onClick={() => props.handleAddToCart({ id: x.id, name: x.name, price: x.price, image_url: x.image_url })} className="bg-gray-800 text-white px-4 py-2 rounded-md">
+							<h3 className="text-sm text-gray-700">Stock: {x.stock}</h3>
+						</div>
+						<div>
+							<button
+								onClick={() => props.handleAddToCart({ id: x.id, name: x.name, price: x.price, image_url: x.image_url, stock: x.stock })}
+								className="bg-gray-800 text-white px-4 py-2 rounded-md">
 								Add to Cart
 							</button>
 						</div>

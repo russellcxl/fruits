@@ -1,16 +1,10 @@
+import { Product } from "@/app/components/types";
 import { prisma } from "../../prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
-type dataProps = {
-    name: string,
-    price: number,
-    image_url: string,
-    stock: number,
-}
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const data:dataProps = JSON.parse(req.body)
+        const data:Product = JSON.parse(req.body)
         if (req.method === 'POST') {
             const fruit = await prisma.fruit.create({
                 data
@@ -22,5 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
     } catch(e) {
         res.status(500).json("failed to add fruit to database")
+    } finally {
+        await prisma.$disconnect();
     }
 }

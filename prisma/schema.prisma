@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
 }
 
 datasource db {
@@ -16,8 +16,8 @@ model fruit {
 }
 
 model purchase {
-  id                    Int      @id @default(autoincrement())
-  purchase_date         DateTime @db.Timestamp
-  purchase_value        Decimal  @db.Decimal(10, 2)
-  purchased_items       Json
+  id              Int      @id @default(autoincrement())
+  purchase_date   DateTime @db.Timestamp
+  purchase_value  Decimal  @db.Decimal(10, 2)
+  purchased_items Json
 }

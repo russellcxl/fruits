@@ -4,29 +4,39 @@ import { useEffect, useState } from 'react';
 import { Cart } from './components/cart';
 import { Products } from './components/products';
 import { CartItem, Product, PurchasedItem } from './components/types';
-import { log } from 'console';
 
 export default function Home() {
-	const [data, setData] = useState<{ id: number, name: string, price: number, image_url: string }[]>([]);
+	const [products, setProducts] = useState<Product[]>([]);
 	const [cart, setCart] = useState<CartItem[]>([]);
 
 	useEffect(() => {
 		const res = async () => {
 			const res = await fetch('/api/get-fruits')
 			const data = await res.json()
-			setData(data)
+			setProducts(data)
 		};
 		res();
 	}, []);
 
 	const handleAddToCart = (fruit: Product) => {
-		const existingCartItem = cart.find(item => item.id === fruit.id);
+
+		// add items to cart panel
+		const existingCartItem = cart.find(item => item.id === fruit.id)
 		if (existingCartItem) {
-			setCart(prevCart => prevCart.map(item => item.id === fruit.id ? { ...item, quantity: item.quantity + 1 } : item));
+			setCart(prevCart => prevCart.map(item => item.id === fruit.id ? { ...item, quantity: item.quantity + 1 } : item))
 		} else {
-			setCart(prevCart => [...prevCart, { id: fruit.id, name: fruit.name, price: fruit.price, quantity: 1 }]);
+			setCart(prevCart => [...prevCart, { id: fruit.id, name: fruit.name, price: fruit.price, quantity: 1 }])
 		}
-	};
+
+		// reduce stock value for product
+		for (let i = 0; i < products.length; i++) {
+			const p = products[i]
+			if (fruit.id === p.id) {
+				p.stock--
+			}			
+		}
+		setProducts(products)
+	}
 
 	const handleRemoveFromCart = (fruitId: number) => {
 		setCart(prevCart => prevCart.filter(item => item.id !== fruitId))
@@ -41,17 +51,18 @@ export default function Home() {
 			}, 0)
 			const purchasedItems:PurchasedItem[] = cart.map((item) => {
 				return {
+					id: item.id,
 					name: item.name,
 					quantity: item.quantity,
 				}
 			})
-			console.log(`adding purchase: ${purchasedItems}`);
+			setCart([])
 			const res = await fetch('/api/add-purchase', {
 				method: 'POST',
 				body: JSON.stringify({
 					purchase_date: new Date(),
 					purchase_value: sum,
-					purchased_items: JSON.stringify(purchasedItems),
+					purchased_items: purchasedItems,
 				})
 			});
 			console.log('Successfully added purchase!');
@@ -66,11 +77,13 @@ export default function Home() {
 
 			<div className="col-span-12 rounded-lg bg-white p-32 sm:col-span-8">
 				<Products
-					products={data}
+					products={products}
 					handleAddToCart={handleAddToCart} />
 			</div>
 			<div className="col-span-12 rounded-lg border border-gray-400 bg-gray-200 p-16 sm:col-span-4">
-				<Cart items={cart} handleCheckout={handleCheckout} />
+				<Cart 
+					items={cart} 
+					handleCheckout={handleCheckout} />
 			</div>
 
 		</div>

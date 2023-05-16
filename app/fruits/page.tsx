@@ -11,9 +11,14 @@ export default function Example() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const data = { name: fruitName, price: fruitPrice, image_url: fruitImage, stock: fruitStock }
+    setFruitName('')
+    setFruitPrice('')
+    setFruitImage('')
+    setFruitStock(0)
     const response = await fetch('/api/add-fruit', {
       method: 'POST',
-      body: JSON.stringify({ name: fruitName, price: fruitPrice, image_url: fruitImage, stock: fruitStock })
+      body: JSON.stringify(data)
     });
     if (response.ok) {
       console.log('Fruit added successfully!');
