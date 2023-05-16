@@ -66,6 +66,7 @@ export default function Home() {
 					quantity: item.quantity,
 				}
 			})
+			if (purchasedItems.length === 0) return 
 			setCart([])
 			const res = await fetch('/api/add-purchase', {
 				method: 'POST',
