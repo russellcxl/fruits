@@ -8,6 +8,7 @@ export type CartItem = {
 export type CartProps = {
     items: CartItem[],
     handleCheckout: () => void,
+    handleRemoveFromCart: (item:CartItem) => void,
 }
 
 export type Product = {

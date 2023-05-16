@@ -41,8 +41,15 @@ export default function Home() {
 
 	}
 
-	const handleRemoveFromCart = (fruitId: number) => {
-		setCart(prevCart => prevCart.filter(item => item.id !== fruitId))
+	const handleRemoveFromCart = (item:CartItem) => {
+		setCart(cart => cart.filter(i => i.id !== item.id))
+		const newProducts = products.map((p)=> {
+			if (p.id === item.id) {
+				p.stock += item.quantity
+			}
+			return p
+		})
+		setProducts(newProducts)
 	}
 
 	const handleCheckout = async () => {
@@ -86,7 +93,8 @@ export default function Home() {
 			<div className="col-span-12 rounded-lg border border-gray-400 bg-gray-200 p-16 sm:col-span-4">
 				<Cart
 					items={cart}
-					handleCheckout={handleCheckout} />
+					handleCheckout={handleCheckout}
+					handleRemoveFromCart={handleRemoveFromCart} />
 			</div>
 
 		</div>
