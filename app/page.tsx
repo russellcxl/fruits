@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { Cart } from './components/cart';
 import { Products } from './components/products';
 import { CartItem, Product, PurchasedItem } from './components/types';
-import { toast, ToastContainer } from "react-toastify";
-import { log } from 'console';
+import { useRouter } from 'next/navigation';
+
 
 export default function Home() {
 	const [products, setProducts] = useState<Product[]>([]);
@@ -20,6 +20,8 @@ export default function Home() {
 		};
 		res();
 	}, []);
+
+	const router = useRouter();
 
 	const handleAddToCart = (fruit: Product) => {
 
@@ -83,7 +85,7 @@ export default function Home() {
 				})
 			});
 			alert('checkout success!')
-			console.log('Successfully added purchase!');
+			router.push("/purchases")
 		} catch (e) {
 			console.error(e);
 			throw e
