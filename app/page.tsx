@@ -4,10 +4,13 @@ import { useEffect, useState } from 'react';
 import { Cart } from './components/cart';
 import { Products } from './components/products';
 import { CartItem, Product, PurchasedItem } from './components/types';
+import { toast, ToastContainer } from "react-toastify";
+import { log } from 'console';
 
 export default function Home() {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [cart, setCart] = useState<CartItem[]>([]);
+
 
 	useEffect(() => {
 		const res = async () => {
@@ -41,9 +44,9 @@ export default function Home() {
 
 	}
 
-	const handleRemoveFromCart = (item:CartItem) => {
+	const handleRemoveFromCart = (item: CartItem) => {
 		setCart(cart => cart.filter(i => i.id !== item.id))
-		const newProducts = products.map((p)=> {
+		const newProducts = products.map((p) => {
 			if (p.id === item.id) {
 				p.stock += item.quantity
 			}
@@ -66,7 +69,10 @@ export default function Home() {
 					quantity: item.quantity,
 				}
 			})
-			if (purchasedItems.length === 0) return 
+			if (purchasedItems.length === 0) {
+				alert("cart is empty!")
+				return
+			}
 			setCart([])
 			const res = await fetch('/api/add-purchase', {
 				method: 'POST',
@@ -76,6 +82,7 @@ export default function Home() {
 					purchased_items: purchasedItems,
 				})
 			});
+			alert('checkout success!')
 			console.log('Successfully added purchase!');
 		} catch (e) {
 			console.error(e);

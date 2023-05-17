@@ -1,37 +1,10 @@
 "use client"
+import { toast } from "react-toastify";
 
-import { useState } from 'react';
+export default function Test() {
 
-function QuantitySelector() {
+    const onClick = () => toast('Toast is good', { hideProgressBar: true, autoClose: 2000, type: 'success' })
 
-	return (
-		<div>
-			<label className="sr-only"> Quantity </label>
+    return (<button onClick={onClick}> Click Me</button>)
 
-			<div className="flex items-center gap-1">
-				<button
-					type="button"
-					className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
-				>
-					&minus;
-				</button>
-
-				<input
-					type="number"
-					id="Quantity"
-					value="1"
-					className="h-10 w-24 rounded border-gray-200 sm:text-sm"
-				/>
-
-				<button
-					type="button"
-					className="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75"
-				>
-					&plus;
-				</button>
-			</div>
-		</div>
-	);
 }
-
-export default QuantitySelector;
