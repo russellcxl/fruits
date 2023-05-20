@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react';
-import { Purchase } from '../components/types';
+import { Purchase, PurchasedItem } from '../components/types';
 
 export default function Home() {
     const [data, setData] = useState<Purchase[]>([]);
@@ -9,10 +9,12 @@ export default function Home() {
         const fetchResponse = async () => {
             const res = await fetch('/api/get-purchases');
             const data: Purchase[] = await res.json();
-            const parsedData = data.map((purchase) => ({
-                ...purchase,
-                purchase_date: new Date(purchase.purchase_date)
-            }));
+            const parsedData = data.map((purchase) => {
+                return {
+                    ...purchase,
+                    purchase_date: new Date(purchase.purchase_date),
+                }
+            })
             setData(parsedData);
         };
         fetchResponse();
@@ -55,7 +57,9 @@ export default function Home() {
                                             <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                 <div className="flex items-center gap-x-2">
                                                     <div>
-                                                        {JSON.stringify(d.purchased_items)}
+                                                        {d.purchased_items.map((p) => (
+                                                            <h2>{p.name} ({p.quantity})</h2>
+                                                        ))}
                                                     </div>
                                                 </div>
                                             </td>
