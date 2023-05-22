@@ -1,27 +1,24 @@
-"use client"
-
-import { useEffect, useState } from 'react';
 import { Purchase, PurchasedItem } from '../../components/types';
 import React from 'react';
 import { Purchases } from '../../components/purchases';
+import prisma from '../../prisma/client';
 
-export default function Home() {
-    const [data, setData] = useState<Purchase[]>([]);
-    useEffect(() => {
-        const fetchResponse = async () => {
-            const res = await fetch('/api/get-purchases');
-            const data: Purchase[] = await res.json();
-            const parsedData = data.map((purchase) => {
-                return {
-                    ...purchase,
-                    purchase_date: new Date(purchase.purchase_date),
-                }
-            })
-            setData(parsedData);
-        };
-        fetchResponse();
-    }, []);
+const batchLimit = 500
+
+export default async function Page() {
+    const res = await getPurchases();
+    const data: Purchase[] = JSON.parse(res);
     return (
         <Purchases purchases={data} />
     )
+}
+
+async function getPurchases() {
+    const data = await prisma.purchase.findMany({
+        take: batchLimit,
+        orderBy: {
+            purchase_date: 'desc'
+        },
+    })
+    return JSON.stringify(data)
 }
