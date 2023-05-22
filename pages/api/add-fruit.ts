@@ -1,10 +1,10 @@
 import { Product } from "../../components/types";
-import prisma from "../../prisma/client";
+import { prisma } from "../../prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const data:Product = JSON.parse(req.body)
+        const data: Product = JSON.parse(req.body)
         if (req.method === 'POST') {
             const fruit = await prisma.fruit.create({
                 data
@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         } else {
             res.status(405).json({ message: 'Method not allowed' });
         }
-    } catch(e) {
+    } catch (e) {
         res.status(500).json("failed to add fruit to database")
     } finally {
         await prisma.$disconnect();

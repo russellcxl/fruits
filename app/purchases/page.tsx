@@ -1,7 +1,7 @@
 import { Purchase, PurchasedItem } from '../../components/types';
 import React from 'react';
 import { Purchases } from '../../components/purchases';
-import prisma from '../../prisma/client';
+import {prisma} from '../../prisma/client';
 
 const batchLimit = 500
 
