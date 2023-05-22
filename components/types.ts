@@ -36,3 +36,7 @@ export type Purchase = {
     purchase_value: number,
     purchased_items: PurchasedItem[],
 }
+
+export type PurchaseProps = {
+    purchases: Purchase[],
+}

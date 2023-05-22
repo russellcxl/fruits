@@ -1,10 +1,11 @@
 "use client"
 
 import { useEffect, useState } from 'react';
-import { Cart } from './components/cart';
-import { Products } from './components/products';
-import { CartItem, Product, PurchasedItem } from './components/types';
+import { Cart } from '../components/cart';
+import { Products } from '../components/products';
+import { CartItem, Product, PurchasedItem } from '../components/types';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 
 
 export default function Home() {

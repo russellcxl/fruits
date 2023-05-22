@@ -1,7 +1,7 @@
 "use client"
 
+import React from "react";
 import { useState } from "react";
-import { redirect } from "next/navigation";
 
 export default function Example() {
   const [fruitName, setFruitName] = useState('');

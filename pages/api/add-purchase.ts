@@ -1,5 +1,5 @@
-import { Purchase, PurchasedItem } from "@/app/components/types";
-import { prisma } from "../../prisma/client";
+import { Purchase, PurchasedItem } from "../../components/types";
+import prisma from "../../prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 
