@@ -1,4 +1,4 @@
-import { Purchase, PurchasedItem } from '../../components/types';
+import { Purchase } from '../../types/types';
 import React from 'react';
 import { Purchases } from '../../components/purchases';
 import {prisma} from '../../prisma/client';

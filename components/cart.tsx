@@ -1,5 +1,5 @@
 import React from 'react';
-import { CartProps } from './types';
+import { CartProps } from '../types/types';
 
 export function Cart(props: CartProps) {
     const sum = props.items.map((item) => {

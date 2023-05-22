@@ -1,5 +1,5 @@
 import React from 'react';
-import { PurchaseProps } from './types';
+import { PurchaseProps } from '../types/types';
 
 export function Purchases(props:PurchaseProps) {
 	return (

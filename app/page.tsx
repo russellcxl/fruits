@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Cart } from '../components/cart';
 import { Products } from '../components/products';
-import { CartItem, Product, PurchasedItem } from '../components/types';
+import { CartItem, Product, PurchasedItem } from '../types/types';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 

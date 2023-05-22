@@ -1,4 +1,4 @@
-import { Purchase, PurchasedItem } from "../../components/types";
+import { Purchase, PurchasedItem } from "../../types/types";
 import { prisma } from "../../prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 

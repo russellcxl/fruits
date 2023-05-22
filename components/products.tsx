@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProductsProps } from './types';
+import { ProductsProps } from '../types/types';
 
 export function Products(props: ProductsProps) {
 	return (
