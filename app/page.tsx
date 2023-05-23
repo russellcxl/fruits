@@ -1,23 +1,21 @@
 "use client"
 
-import { useEffect, useState } from 'react';
-import { Cart } from '../components/cart';
-import { Products } from '../components/products';
-import { CartItem, Product, PurchasedItem } from '../types/types';
-import { useRouter } from 'next/navigation';
-import React from 'react';
-
+import { useEffect, useState } from 'react'
+import { Cart } from '../components/cart'
+import { Products } from '../components/products'
+import { CartItem, Product, PurchasedItem } from '../types/types'
+import { useRouter } from 'next/navigation'
+import React from 'react'
 
 export default function Home() {
-	const [products, setProducts] = useState<Product[]>([]);
-	const [cart, setCart] = useState<CartItem[]>([]);
-
+	const [products, setProducts] = useState<Product[]>([])
+	const [cart, setCart] = useState<CartItem[]>([])
 
 	useEffect(() => {
 		const res = async () => {
-			const res = await fetch('/api/get-fruits')
-			const data = await res.json()
-			setProducts(data)
+			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fruits`)
+			const products = await res.json()
+			setProducts(products)
 		};
 		res();
 	}, []);
@@ -77,7 +75,7 @@ export default function Home() {
 				return
 			}
 			setCart([])
-			const res = await fetch('/api/add-purchase', {
+			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/purchases`, {
 				method: 'POST',
 				body: JSON.stringify({
 					purchase_date: new Date(),
@@ -85,8 +83,10 @@ export default function Home() {
 					purchased_items: purchasedItems,
 				})
 			});
-			alert('checkout success!')
-			router.push("/purchases")
+			if (res.ok) {
+				alert('checkout success!')
+				router.push("/purchases")
+			}
 		} catch (e) {
 			console.error(e);
 			throw e
