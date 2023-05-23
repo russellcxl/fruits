@@ -49,6 +49,8 @@ const data = [
 ]
 
 async function main() {
+    const count = await prisma.fruit.count()
+    if (count > 0) return
     await prisma.fruit.createMany({
         data: data
     })
