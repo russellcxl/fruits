@@ -1,7 +1,6 @@
 import { Purchase } from '../../types/types';
 import React from 'react';
 import { Purchases } from "../../components/purchases";
-import { prisma } from '../../prisma/client';
 
 export default async function Page() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/purchases`, {
