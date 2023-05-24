@@ -2,6 +2,8 @@
 
 import React from "react";
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Example() {
 	const [fruitName, setFruitName] = useState('');
@@ -21,9 +23,21 @@ export default function Example() {
 			body: JSON.stringify(data)
 		});
 		if (response.ok) {
-			alert('Fruit added successfully!');
+			toast.success('Added fruit to cart!', {
+				autoClose: 1000,
+				position: "top-center",
+				hideProgressBar: true,
+				closeOnClick: true,
+				pauseOnHover: true,
+			});
 		} else {
-			alert('Error adding fruit!')
+			toast.error('Error adding fruit!', {
+				autoClose: 1000,
+				position: "top-center",
+				hideProgressBar: true,
+				closeOnClick: true,
+				pauseOnHover: true,
+			});
 		}
 	};
 
@@ -105,6 +119,7 @@ export default function Example() {
 					</div>
 				</form>
 			</div>
+			<ToastContainer />
 		</div>
 	)
 }

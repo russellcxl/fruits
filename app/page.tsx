@@ -7,6 +7,9 @@ import { CartItem, Product, PurchasedItem } from '../types/types'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { BallTriangle } from 'react-loader-spinner';
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Home() {
 	const [products, setProducts] = useState<Product[]>([])
@@ -46,6 +49,14 @@ export default function Home() {
 			setCart(prevCart => [...prevCart, { id: fruit.id, name: fruit.name, price: fruit.price, quantity: 1 }])
 		}
 
+		toast.success('Added fruit to cart!', {
+			autoClose: 1000,
+			position: "top-center",
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: true,
+		});
+
 	}
 
 	const handleRemoveFromCart = (item: CartItem) => {
@@ -74,7 +85,13 @@ export default function Home() {
 				}
 			})
 			if (purchasedItems.length === 0) {
-				alert("cart is empty!")
+				toast.error('Cart is empty', {
+					autoClose: 1000,
+					position: "top-center",
+					hideProgressBar: true,
+					closeOnClick: true,
+					pauseOnHover: true,
+				});
 				return
 			}
 			setCart([])
@@ -87,7 +104,6 @@ export default function Home() {
 				})
 			});
 			if (res.ok) {
-				alert('checkout success!')
 				router.push("/purchases")
 			}
 		} catch (e) {
@@ -117,7 +133,7 @@ export default function Home() {
 					handleCheckout={handleCheckout}
 					handleRemoveFromCart={handleRemoveFromCart} />
 			</div>
-
+			<ToastContainer />
 		</div>
 	)
 }
