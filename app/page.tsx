@@ -100,7 +100,7 @@ export default function Home() {
 		<div className="bg-white mx-auto grid grid-cols-12 gap-4 p-1">
 			<div className="col-span-12 rounded-lg bg-white p-16 sm:col-span-8">
 				{isLoading ? (
-					<div className="spinner-container">
+					<div className="h-screen flex items-center justify-center">
 						<BallTriangle color="#3B82F6" height={80} width={80} />
 					</div>
 				) :
