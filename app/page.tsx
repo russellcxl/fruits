@@ -18,10 +18,10 @@ export default function Home() {
 			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fruits`)
 			const products = await res.json()
 			setProducts(products)
+			setIsLoading(false)
 		};
 		res()
-		setIsLoading(false)
-	}, []);
+	}, [isLoading]);
 
 	const router = useRouter();
 
@@ -110,7 +110,6 @@ export default function Home() {
 							handleAddToCart={handleAddToCart} />
 					)
 				}
-
 			</div>
 			<div className="col-span-12 rounded-lg border border-gray-400 bg-gray-200 p-16 sm:col-span-4">
 				<Cart
