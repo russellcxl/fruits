@@ -6,10 +6,12 @@ import { Products } from '../components/products'
 import { CartItem, Product, PurchasedItem } from '../types/types'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { BallTriangle } from 'react-loader-spinner';
 
 export default function Home() {
 	const [products, setProducts] = useState<Product[]>([])
 	const [cart, setCart] = useState<CartItem[]>([])
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		const res = async () => {
@@ -17,7 +19,8 @@ export default function Home() {
 			const products = await res.json()
 			setProducts(products)
 		};
-		res();
+		res()
+		setIsLoading(false)
 	}, []);
 
 	const router = useRouter();
@@ -96,9 +99,18 @@ export default function Home() {
 	return (
 		<div className="bg-white mx-auto grid grid-cols-12 gap-4 p-1">
 			<div className="col-span-12 rounded-lg bg-white p-16 sm:col-span-8">
-				<Products
-					products={products}
-					handleAddToCart={handleAddToCart} />
+				{isLoading ? (
+					<div className="spinner-container">
+						<BallTriangle color="#3B82F6" height={80} width={80} />
+					</div>
+				) :
+					(
+						<Products
+							products={products}
+							handleAddToCart={handleAddToCart} />
+					)
+				}
+
 			</div>
 			<div className="col-span-12 rounded-lg border border-gray-400 bg-gray-200 p-16 sm:col-span-4">
 				<Cart

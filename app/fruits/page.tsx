@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useState } from "react";
-import { Product } from "../../types/types";
 
 export default function Example() {
 	const [fruitName, setFruitName] = useState('');
