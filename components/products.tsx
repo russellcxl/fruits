@@ -1,7 +1,10 @@
 import React from 'react';
 import { ProductsProps } from '../types/types';
+import { useRouter } from 'next/navigation'
+
 
 export function Products(props: ProductsProps) {
+	const router = useRouter()
 	return (
 		<div>
 			<h2 className="text-2xl font-bold tracking-tight text-gray-900">Fruits</h2>
@@ -34,6 +37,17 @@ export function Products(props: ProductsProps) {
 						</div>
 					</div>
 				))}
+
+
+				<div className="group relative">
+					<div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none lg:h-80">
+						<img
+							src={"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/1200px-Plus_symbol.svg.png"}
+							className="h-full w-full object-cover object-center lg:h-full lg:w-full hover:bg-gray-300 hover:cursor-pointer"
+							onClick={() => router.push("/fruits")}
+						/>
+					</div>
+				</div>
 			</div>
 		</div>
 	)
