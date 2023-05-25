@@ -10,11 +10,10 @@ import { BallTriangle } from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
-
 export default function Home() {
 	const [products, setProducts] = useState<Product[]>([])
 	const [cart, setCart] = useState<CartItem[]>([])
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
 		const res = async () => {
@@ -24,9 +23,9 @@ export default function Home() {
 			setIsLoading(false)
 		};
 		res()
-	}, [isLoading]);
+	}, [isLoading])
 
-	const router = useRouter();
+	const router = useRouter()
 
 	const handleAddToCart = (fruit: Product) => {
 
@@ -55,7 +54,7 @@ export default function Home() {
 			hideProgressBar: true,
 			closeOnClick: true,
 			pauseOnHover: true,
-		});
+		})
 
 	}
 
@@ -110,7 +109,7 @@ export default function Home() {
 			console.error(e);
 			throw e
 		}
-	};
+	}
 
 	return (
 		<div className="bg-white mx-auto grid grid-cols-12 gap-4 p-1">

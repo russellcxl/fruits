@@ -4,15 +4,20 @@ import React from "react";
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation'
 
 export default function Example() {
 	const [fruitName, setFruitName] = useState('');
 	const [fruitPrice, setFruitPrice] = useState('');
 	const [fruitImage, setFruitImage] = useState('');
 	const [fruitStock, setFruitStock] = useState(0);
+	const router = useRouter()
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		if (fruitImage == "") {
+			setFruitImage("https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930")
+		}
 		const data = { name: fruitName, price: Number(fruitPrice), image_url: fruitImage, stock: fruitStock }
 		setFruitName('')
 		setFruitPrice('')
@@ -30,6 +35,7 @@ export default function Example() {
 				closeOnClick: true,
 				pauseOnHover: true,
 			});
+			router.push("/")
 		} else {
 			toast.error('Error adding fruit!', {
 				autoClose: 1000,
@@ -87,7 +93,6 @@ export default function Example() {
 							<input
 								onChange={(e) => setFruitImage(e.target.value)}
 								type="text"
-								required
 								className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 							/>
 						</div>

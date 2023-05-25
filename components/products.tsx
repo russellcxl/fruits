@@ -7,13 +7,21 @@ export function Products(props: ProductsProps) {
 	const router = useRouter()
 	return (
 		<div>
-			<h2 className="text-2xl font-bold tracking-tight text-gray-900">Fruits</h2>
+			<div className="flex justify-between">
+				<h2 className="text-2xl font-bold tracking-tight text-gray-900">Fruits</h2>
+				<button
+					className="rounded-md bg-blue-500 hover:bg-blue-700 px-3 py-1.5 text-2xl font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+					onClick={() => router.push("/purchases")}
+				>
+					Purchases
+				</button>
+			</div>
 			<div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 				{props.products.map((x) => (
 					<div key={x.id} className="group relative">
 						<div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none lg:h-80">
 							<img
-								src={x.image_url}
+								src={x.image_url == "" ? "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930" : x.image_url}
 								className="h-full w-full object-cover object-center lg:h-full lg:w-full"
 							/>
 						</div>
